@@ -52,9 +52,10 @@ namespace PointSystem.Controllers
 
                 var claims = new[]
                 {
-                  new Claim("idUsuario", $"{user.Email}"),
+                  new Claim("idUser", $"{user.Id}"),
+                  new Claim("Login", $"{user.Email}"),
                   //new Claim(ClaimTypes.Name, request.Username),
-                  new Claim(ClaimTypes.Role, "Admin"),
+                  //new Claim(ClaimTypes.Role, "Admin"),
                   new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
 
