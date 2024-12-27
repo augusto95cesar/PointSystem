@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using PointSystem.DTOs;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -10,6 +12,7 @@ namespace PointSystem.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [EnableCors("AllowSpecificOrigin")]
     public class AuthController : ControllerBase
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -36,8 +39,11 @@ namespace PointSystem.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(string email, string password)
+        public async Task<IActionResult> Login(PostLoginDTO login)
         {
+            string email = login.Email; 
+            string password = login.Password;
+
             var user = await _userManager.FindByEmailAsync(email);
             if (user != null && await _userManager.CheckPasswordAsync(user, password))
             {
@@ -68,7 +74,7 @@ namespace PointSystem.Controllers
                 );
 
                 var tokenWrite = new JwtSecurityTokenHandler().WriteToken(token);
-                return Ok("Bearer " + tokenWrite);
+                return Ok(new { token = "Bearer " + tokenWrite });
 
                 //return Ok(new
                 //{

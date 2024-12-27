@@ -9,6 +9,14 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder
+            .WithOrigins("http://localhost:4200") // Adicione a origem do seu frontend  
+            .AllowAnyMethod() // Permite qualquer método (GET, POST, etc.)  
+            .AllowAnyHeader()); // Permite qualquer cabeçalho  
+});
 // Configure o banco de dados SQLite
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -78,6 +86,9 @@ builder.Services.AddAuthorization();
 // Adicione controllers
 builder.Services.AddControllers();
 var app = builder.Build();
+
+// Use a política de CORS  
+app.UseCors("AllowAllOrigins");
 
 app.UseSwagger();
 app.UseSwaggerUI(options =>
