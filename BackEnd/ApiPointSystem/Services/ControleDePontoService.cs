@@ -21,7 +21,7 @@ namespace PointSystem.Services
         {
             var result = new List<GetPontosDTOs>();
             var pontos = _repository.GetAllPontos(idUser);
-            var registroPorData = pontos.Select(x => x.Data).GroupBy(x => x.ToString("yyyy-MM-dd"));
+            var registroPorData = pontos.OrderByDescending(x => x.Data).Select(x => x.Data).GroupBy(x => x.ToString("yyyy-MM-dd"));
 
             foreach (var grupo in registroPorData.ToList())
             {

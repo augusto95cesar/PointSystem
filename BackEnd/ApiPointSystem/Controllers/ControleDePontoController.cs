@@ -1,14 +1,17 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using PointSystem.Data;
-using PointSystem.Model.Enum;
+using PointSystem.Model.Enum; 
 using PointSystem.Services;
 
 namespace PointSystem.Controllers
 {
     [Authorize]
-    [Route("[controller]")]
     [ApiController]
+    [Route("[controller]")]
+    [EnableCors("AllowSpecificOrigin")]
+
     public class ControleDePontoController : ControllerBase
     {
         private ControleDePontoService _service;
@@ -21,8 +24,11 @@ namespace PointSystem.Controllers
         [HttpGet]
         public IActionResult Get() => Ok(_service.Get(User.FindFirst("idUser")?.Value));
 
-        [HttpPost]
-        public IActionResult Post(bool entrada) => Ok(_service.Add(User.FindFirst("idUser")?.Value, entrada == true ? TypePonto.Entrata : TypePonto.Saida));
+        [HttpPost("RegistrarEntrada")]
+        public IActionResult Entrata() => Ok(_service.Add(User.FindFirst("idUser")?.Value, TypePonto.Entrata));
+        
+        [HttpPost("RegistrarSaida")]
+        public IActionResult Saida() => Ok(_service.Add(User.FindFirst("idUser")?.Value,  TypePonto.Saida));
 
     }
 }

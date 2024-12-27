@@ -1,1 +1,32 @@
-<p>pontos works!</p>
+<div>
+    <label>
+      <input 
+        type="checkbox" 
+        [(ngModel)]="isEntradaChecked" 
+        (change)="onEntradaChange()" 
+      />
+      Entrada
+    </label>
+  </div>
+  <div>
+    <label>
+      <input 
+        type="checkbox" 
+        [(ngModel)]="isSaidaChecked" 
+        (change)="onSaidaChange()" 
+      />
+      Saída
+    </label>
+  </div>
+
+<form (ngSubmit)="RegistrarPonto()"> 
+    <button type="submit">Registrar</button>  
+  </form>
+
+<h1>Lista de Pontos</h1>  
+<ul>  
+  <li *ngFor="let item of pontos">  
+    {{ item.data }}  {{ item.entrada }} - {{ item.saida }} <!-- Exibe os campos desejados -->  
+  </li>  
+</ul>  
+ 

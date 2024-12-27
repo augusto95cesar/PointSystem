@@ -28,8 +28,15 @@ export class AuthService {
    this.router.navigate(['/login']); // Navegar para a página de login  
  }  
 
- isAuthenticated(): boolean {  
-   return !!localStorage.getItem(this.tokenKey); // Retorna true se o token existir  
+ isAuthenticated(): boolean {   
+    var existe = !!localStorage.getItem(this.tokenKey);
+
+    if(existe === false)
+    {
+      this.router.navigate(['/login']);
+    }
+
+   return  true // Retorna true se o token existir  
  }  
 
  getToken(): string | null {  
