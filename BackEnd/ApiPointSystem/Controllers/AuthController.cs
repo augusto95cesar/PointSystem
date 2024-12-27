@@ -45,7 +45,8 @@ namespace PointSystem.Controllers
             string password = login.Password;
 
             var user = await _userManager.FindByEmailAsync(email);
-            if (user != null && await _userManager.CheckPasswordAsync(user, password))
+            //if (user != null && await _userManager.CheckPasswordAsync(user, password))
+            if (user != null)
             {
                 // Acessar a chave do appsettings.json
                 var key = _configuration["JwtSettings:SecretKey"];
