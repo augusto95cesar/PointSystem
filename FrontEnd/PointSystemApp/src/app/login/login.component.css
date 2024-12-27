@@ -1,0 +1,28 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+form#form-login {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+div#div-login {
+    background: #d3d5ef;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 5%;
+}
+
+.div-login {
+    margin-top: 2%;
+}

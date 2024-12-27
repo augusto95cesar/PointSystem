@@ -1,13 +1,29 @@
-<h2>Login</h2>  
-<form (ngSubmit)="login()">  
-  <div>  
-    <label for="username">Usuário:</label>  
-    <input id="username" [(ngModel)]="username" name="username" required>  
-  </div>  
-  <div>  
-    <label for="password">Senha:</label>  
-    <input type="password" id="password" [(ngModel)]="password" name="password" required>  
-  </div>  
-  <!-- <div *ngIf="errorMessage">{{ errorMessage }}</div>   -->
-  <button type="submit">Login</button>  
-</form>
+<div id="div-login">
+  <form id="form-login" class="example-form" (ngSubmit)="login()">
+    <div class="div-login">
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input type="email" [(ngModel)]="username" matInput [formControl]="emailFormControl"
+          [errorStateMatcher]="matcher" placeholder="Ex. pat@example.com">
+        <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+        @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+        <mat-error>Please enter a valid email address</mat-error>
+        }
+        @if (emailFormControl.hasError('required')) {
+        <mat-error>Email is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="div-login">
+      <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"
+          placeholder="Enter your password">
+      </mat-form-field>
+    </div>
+
+    <button type="submit" mat-raised-button>Logar</button>
+
+  </form>
+</div>
