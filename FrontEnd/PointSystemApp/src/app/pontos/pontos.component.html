@@ -1,32 +1,44 @@
-<div>
+<div id="div-ponto-main">
+  <div id="div-menu-ponto">
+    <button class="btn-menu">{{userLogado}}</button> | <button class="btn-menu" id="btnSairSystem"
+      (click)="deslogar()">Sair</button>
+  </div>
+
+
+  <div id="div-registro=ponto"> 
     <label>
-      <input 
-        type="checkbox" 
-        [(ngModel)]="isEntradaChecked" 
-        (change)="onEntradaChange()" 
-      />
+      <input type="checkbox" [(ngModel)]="isEntradaChecked" (change)="onEntradaChange()" />
       Entrada
-    </label>
-  </div>
-  <div>
+    </label> 
     <label>
-      <input 
-        type="checkbox" 
-        [(ngModel)]="isSaidaChecked" 
-        (change)="onSaidaChange()" 
-      />
+      <input type="checkbox" [(ngModel)]="isSaidaChecked" (change)="onSaidaChange()" />
       Saída
-    </label>
+    </label> 
+    <form (ngSubmit)="RegistrarPonto()">
+      <button type="submit" mat-flat-button>Registrar</button>
+    </form>
   </div>
 
-<form (ngSubmit)="RegistrarPonto()"> 
-    <button type="submit">Registrar</button>  
-  </form>
+  <div id="div-registro-list">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef> Data </th>
+        <td mat-cell *matCellDef="let element"> {{element.data}} </td>
+      </ng-container>
 
-<h1>Lista de Pontos</h1>  
-<ul>  
-  <li *ngFor="let item of pontos">  
-    {{ item.data }}  {{ item.entrada }} - {{ item.saida }} <!-- Exibe os campos desejados -->  
-  </li>  
-</ul>  
- 
+      <!-- Name Column -->
+      <ng-container matColumnDef="entrada">
+        <th mat-header-cell *matHeaderCellDef> Entrada </th>
+        <td mat-cell *matCellDef="let element"> {{element.entrada}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="saida">
+        <th mat-header-cell *matHeaderCellDef> Saida </th>
+        <td mat-cell *matCellDef="let element"> {{element.saida}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

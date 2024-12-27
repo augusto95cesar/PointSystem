@@ -25,10 +25,29 @@ namespace PointSystem.Controllers
         public IActionResult Get() => Ok(_service.Get(User.FindFirst("idUser")?.Value));
 
         [HttpPost("RegistrarEntrada")]
-        public IActionResult Entrata() => Ok(_service.Add(User.FindFirst("idUser")?.Value, TypePonto.Entrata));
-        
-        [HttpPost("RegistrarSaida")]
-        public IActionResult Saida() => Ok(_service.Add(User.FindFirst("idUser")?.Value,  TypePonto.Saida));
+        public IActionResult Entrata()
+        {
+            try
+            {
+                return Ok(_service.Add(User.FindFirst("idUser")?.Value, TypePonto.Entrata));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
+        [HttpPost("RegistrarSaida")]
+        public IActionResult Saida()
+        {
+            try
+            {
+                return Ok(_service.Add(User.FindFirst("idUser")?.Value, TypePonto.Saida));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            } 
+        } 
     }
 }
