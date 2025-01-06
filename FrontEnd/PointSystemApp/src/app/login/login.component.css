@@ -26,3 +26,9 @@ div#div-login {
 .div-login {
     margin-top: 2%;
 }
+
+div#btn-login-submit {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}

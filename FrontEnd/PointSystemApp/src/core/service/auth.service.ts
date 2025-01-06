@@ -13,6 +13,12 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  createLogin(username: string, password: string): Observable<any> { 
+    var url = '/Auth/register?email='+username+'&password='+password 
+    return this.http.post(`${this.apiUrl + url}`, {}) 
+  }
+
+
   login(username: string, password: string): Observable<any> {
 
     return this.http.post<any>(`${this.apiUrl + '/Auth/login'}`, { email: username, password: password })

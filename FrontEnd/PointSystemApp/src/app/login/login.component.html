@@ -1,5 +1,6 @@
 <div id="div-login">
-  <form id="form-login" class="example-form" (ngSubmit)="login()">
+  <!-- <form id="form-login" class="example-form" (ngSubmit)="login()"> -->
+    <form id="form-login" class="example-form" >
     <div class="div-login">
       <mat-form-field class="example-full-width">
         <mat-label>Email</mat-label>
@@ -23,7 +24,10 @@
       </mat-form-field>
     </div>
 
-    <button type="submit" mat-raised-button>Logar</button>
+    <div id="btn-login-submit">
+      <button type="button" (click)="createUser()" mat-button>criar conta</button>
+      <button type="button" (click)="login()" mat-raised-button>Logar</button>
+    </div>
 
   </form>
 </div>

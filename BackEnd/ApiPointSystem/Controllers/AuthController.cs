@@ -27,15 +27,25 @@ namespace PointSystem.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(string email, string password)
         {
-            var user = new IdentityUser { UserName = email, Email = email };
-            var result = await _userManager.CreateAsync(user, password);
-
-            if (result.Succeeded)
+            try
             {
-                return Ok("User registered successfully");
-            }
+                var user = new IdentityUser { UserName = email, Email = email };
+                var result = await _userManager.CreateAsync(user, password);
 
-            return BadRequest(result.Errors);
+                if (result.Succeeded)
+                {
+                    return Ok();
+                }
+                return BadRequest(result.Errors);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+
+            }
+            
+
         }
 
         [HttpPost("login")]
